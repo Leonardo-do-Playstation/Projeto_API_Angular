@@ -1,19 +1,22 @@
-import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
+import { Alunos } from './entity/alunos/alunos';
+import { AlunosService } from './services/aluno-service';
 
 @NgModule({
   declarations: [
-    App
+    App,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Alunos
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+    AlunosService 
   ],
   bootstrap: [App]
 })
