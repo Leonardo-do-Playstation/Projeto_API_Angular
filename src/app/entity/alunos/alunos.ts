@@ -1,17 +1,15 @@
-import { Component, OnInit, inject  } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Aluno, AlunosService } from '../../services/aluno-service';
+import { Component, inject } from '@angular/core';
+import { Alunos, AlunosServiceService } from '../../services/alunos-service.service';
 
 @Component({
   selector: 'app-alunos',
-  imports: [FormsModule],
-  templateUrl: './alunos.html',
-  standalone: true,
-  styleUrl: './alunos.css'
+  standalone: false,
+  templateUrl: './alunos.component.html',
+  styleUrl: './alunos.component.css'
 })
-export class Alunos {
-  private api = inject(AlunosService);
 
+export class AlunosComponent {
+  private api = inject(AlunosServiceService);
   alunos: Aluno[] = [];
   carregando = false;
   salvando = false;
@@ -21,7 +19,7 @@ export class Alunos {
   nome = '';
   idade: number | null = null;
   curso = '';
-  notasCsv = ''; // ex.: "7,8,9"
+  notasCsv = ''; // ex: "8,7.5,9"
 
   ngOnInit() { this.carregar(); }
 
@@ -35,20 +33,20 @@ export class Alunos {
   }
 
   criar() {
-    if (!this.nome || this.idade == null || !this.curso) return;
+    if (!this.nome || this.idade === null || !this.curso) return
 
     const notas = this.notasCsv
       .split(',').map(s => Number(s.trim()))
       .filter(n => !Number.isNaN(n));
 
-    const aluno: Aluno = {
+    const novo: Aluno = {
       nome: this.nome,
       idade: Number(this.idade),
       curso: this.curso, notas
     };
 
     this.salvando = true;
-    this.api.criar(aluno).subscribe({
+    this.api.criar(novo).subscribe({
       next: _ => {
         this.nome = ''; this.idade = null; this.curso = '';
         this.notasCsv = '';
@@ -59,12 +57,11 @@ export class Alunos {
     });
   }
 
-  excluir(id?: string) {
+  excluir(id?: String) {
     if (!id) return;
     this.api.excluir(id).subscribe({
-      next: _ => this.carregar(),
-      error: e => this.erro = e.message ?? 'Falha ao excluir'
+      next: _ => { this.carregar(); },
+      error: e => { this.erro = e.message ?? 'Falha ao excluir'; }
     });
   }
-
 }

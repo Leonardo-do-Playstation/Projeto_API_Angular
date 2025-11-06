@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Aluno {
-  _id?: String;
-  nome: String;
+  _id?: string;
+  nome: string;
   idade: number;
   curso: string;
   notas: number[];
