@@ -1,4 +1,13 @@
-# PGAngularAPI
+# Projeto_API_Angular
+Interface Angular desenvolvida para consumir e visualizar dados da API Node.js.
+
+Este repositório contém o front-end da aplicação, focado em oferecer uma experiência de usuário reativa e eficiente, conectando-se aos serviços disponibilizados pelo nosso backend.
+
+🛠️ Tecnologias Utilizadas
+Framework: Angular (v17+)
+Linguagem: TypeScript
+Gerenciamento de Estado/Fluxo: RxJS
+Consumo de API: HttpClient (REST)
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
 
