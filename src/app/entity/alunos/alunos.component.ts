@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { Alunos, AlunosServiceService } from '../../services/alunos-service.service';
+import { Aluno, AlunosService } from '../../services/aluno-service';
+
 
 @Component({
   selector: 'app-alunos',
@@ -9,7 +10,7 @@ import { Alunos, AlunosServiceService } from '../../services/alunos-service.serv
 })
 
 export class AlunosComponent {
-  private api = inject(AlunosServiceService);
+  private api = inject(AlunosService);
   alunos: Aluno[] = [];
   carregando = false;
   salvando = false;
@@ -57,7 +58,7 @@ export class AlunosComponent {
     });
   }
 
-  excluir(id?: String) {
+  excluir(id?: string) {
     if (!id) return;
     this.api.excluir(id).subscribe({
       next: _ => { this.carregar(); },
